@@ -1,0 +1,4 @@
+description="Use your preferred Google Fonts."
+parameters="GOOGLE_HEADLINE_FONT;GOOGLE_BODY_FONT"
+parameter.GOOGLE_HEADLINE_FONT="'Walter Turncoat', cursive;"
+parameter.GOOGLE_BODY_FONT="'IBM Plex Mono', monospace;"
