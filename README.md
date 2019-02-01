@@ -10,4 +10,4 @@ PHP: allow_url_fopen
 
 config
 example https://fonts.google.com/?selection.family=IBM+Plex+Mono|Walter+Turncoat
-click selected fonts -> CUSTOMIZE tab -> customize how you like. -> EMBED tab -> Specify in CSS section -> copy each line as is and paste to: GOOGLE HEADLINE FONT & GOOGLE BODY FONT respectfully.
+click selected fonts -> CUSTOMIZE tab -> customize how you like. -> EMBED tab -> Specify in CSS section -> copy each line (ex. `'Walter Turncoat', cursive;`) and paste to: GOOGLE HEADLINE FONT & GOOGLE BODY FONT respectfully.
