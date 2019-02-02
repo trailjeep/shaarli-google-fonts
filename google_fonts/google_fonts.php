@@ -19,14 +19,15 @@ function google_fonts_init($conf)
 		return ['allow_url_fopen must be enabled in php.ini'];
 	}
 
-	$hdlncss = $conf->get('plugins.GOOGLE_HEADLINE_FONT');
-	if (empty($hdlncss)) {
-        $conf->set('plugins.GOOGLE_HEADLINE_FONT', "'Walter Turncoat', cursive;");
-    }
-	$bodycss = $conf->get('plugins.GOOGLE_BODY_FONT');
-    if (empty($bodycss)) {
-        $conf->set('plugins.GOOGLE_BODY_FONT', "'IBM Plex Mono', monospace;");
-    }
+	$hdlnfnt = $conf->get('plugins.GOOGLE_HEADLINE_FONT');
+	if (empty($hdlnfnt)) { $conf->set('plugins.GOOGLE_HEADLINE_FONT', "Walter Turncoat"); }
+	$bodyfnt = $conf->get('plugins.GOOGLE_BODY_FONT');
+    if (empty($bodyfnt)) { $conf->set('plugins.GOOGLE_BODY_FONT', "IBM Plex Mono"); }
+	$hdlnfbk = $conf->get('plugins.GOOGLE_HEADLINE_FALLBACK_FONT');
+	if (empty($hdlnfbk)) { $conf->set('plugins.GOOGLE_HEADLINE_FALLBACK_FONT', "cursive"); }
+	$bodyfbk = $conf->get('plugins.GOOGLE_BODY_FALLBACK_FONT');
+    if (empty($bodyfbk)) { $conf->set('plugins.GOOGLE_BODY_FALLBACK_FONT', "monospace"); }
+
 }
 
 /**
@@ -50,15 +51,17 @@ function hook_google_fonts_render_includes($data,$conf)
     // Note that you just need to specify CSS path.
 
     $api     = "https://fonts.googleapis.com/css?family=";
-	$hdlncss = rtrim($conf->get('plugins.GOOGLE_HEADLINE_FONT'), ";");
-	$hdlnimp = str_replace(" ","+",strtok($hdlncss,"'"));
-    $bodycss = rtrim($conf->get('plugins.GOOGLE_BODY_FONT'), ";");;
-    $bodyimp = str_replace(" ","+",strtok($bodycss,"'"));
-	$url     = $api.$hdlnimp."|".$bodyimp;
+	$hdlnfnt = $conf->get('plugins.GOOGLE_HEADLINE_FONT');
+	$hdlnlnk = str_replace(" ","+",$hdlnfnt);
+	$bodyfnt = $conf->get('plugins.GOOGLE_BODY_FONT');
+	$bodylnk = str_replace(" ","+",$bodyfnt);
+    $hdlnfbk = $conf->get('plugins.GOOGLE_HEADLINE_FALLBACK_FONT');
+    $bodyfbk = $conf->get('plugins.GOOGLE_BODY_FALLBACK_FONT');
+	$url     = $api.$hdlnlnk."|".$bodylnk;
 	$file    = PluginManager::$PLUGINS_PATH . '/google_fonts/google_fonts.css';
     $css     = <<< _EOT_
-.pure-menu-item, .shaarli-title, .header-main, .link-header, h1, h2, h3, h4, h5, h6 { font-family: $hdlncss; }
-body, #linklist-loop-content, code, kbd, samp, pre { font-family: $bodycss !important; }
+.pure-menu-item, .shaarli-title, .header-main, .link-header, h1, h2, h3, h4, h5, h6 { font-family: '$hdlnfnt', $hdlnfbk; }
+body, #linklist-loop-content { font-family: '$bodyfnt', $bodyfbk; }
 _EOT_;
 	$hdrs = get_headers($url);
 	if (stripos($hdrs[0],"200 OK")) {

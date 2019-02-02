@@ -1,4 +1,7 @@
-description="Use your preferred Google Fonts."
-parameters="GOOGLE_HEADLINE_FONT;GOOGLE_BODY_FONT"
-parameter.GOOGLE_HEADLINE_FONT="'Walter Turncoat', cursive;"
-parameter.GOOGLE_BODY_FONT="'IBM Plex Mono', monospace;"
+description="Use your preferred <a href=\"https://fonts.google.com/\">Google Fonts</a>.
+<br><strong>Warning</strong>: Check prerequisites and installation in the <a href=\"https://github.com/trailjeep/shaarli-google-fonts/blob/master/README.md\">README</a>."
+parameters="GOOGLE_HEADLINE_FONT;GOOGLE_HEADLINE_FALLBACK_FONT;GOOGLE_BODY_FONT;GOOGLE_BODY_FALLBACK_FONT"
+parameter.GOOGLE_HEADLINE_FONT="Walter Turncoat"
+parameter.GOOGLE_HEADLINE_FALLBACK_FONT="cursive"
+parameter.GOOGLE_BODY_FONT="IBM Plex Mono"
+parameter.GOOGLE_BODY_FALLBACK_FONT="monospace"
